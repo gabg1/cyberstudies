@@ -92,24 +92,25 @@ In order to use the playbook, you will need to have an Ansible control node alre
 
 SSH into the control node and follow the steps below:
 - Copy the [install-elk.yml](https://github.com/gabg1/cyberstudies/blob/43d3b2c0d88cf29713b89d2e328ddd7452f79337/Ansible/install-elk.yml) file to your machine on "/etc/ansible" location.
-
+```
 cd /etc/ansible/ 
 curl https://github.com/gabg1/cyberstudies/blob/e29f13df5a00ead1f4cbe55d6289f2084d5dac1e/Ansible/install-elk.yml > /etc/ansible/install-elk.yml
+```
 
 - On "/etc/ansible/" edit your "hosts" file to include the Web Servers VMs (webservers) and the VM where you ELK stack will run(elk). 
-- 
+
 Example:
 
 $ nano /etc/ansible/hosts
 
-
+```
 [webservers]
 10.0.0.7 ansible_python_interpreter=/usr/bin/python3
 10.0.0.6 ansible_python_interpreter=/usr/bin/python3
 
 [elk]
 10.1.0.5 ansible_python_interpreter=/usr/bin/python3
-
+```
  
 - Run the playbook:
 ansible-playbook install-elk.yml 
