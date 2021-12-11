@@ -97,7 +97,7 @@ cd /etc/ansible/
 curl https://github.com/gabg1/cyberstudies/blob/e29f13df5a00ead1f4cbe55d6289f2084d5dac1e/Ansible/install-elk.yml > /etc/ansible/install-elk.yml
 ```
 
-- On "/etc/ansible/" edit your "hosts" file to include the Web Servers VMs (webservers) and the VM where you ELK stack will run(elk). 
+- On "/etc/ansible/" edit your "hosts" file to include the Web Servers VMs[webservers] and the VM where you ELK stack will run[elk]. 
 
 Example:
 
