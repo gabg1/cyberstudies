@@ -21,50 +21,53 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly _____, in addition to restricting _____ to the network.
+Load balancing ensures that the application will be highly available, in addition to restricting downtime to the network.
 - _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
 
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the file system and system logs.
 - _TODO: What does Filebeat watch for?_
 - _TODO: What does Metricbeat record?_
 
 The configuration details of each machine may be found below.
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
-| Name     | Function | IP Address | Operating System |
-|----------|----------|------------|------------------|
-| Jump Box | Gateway  | 10.0.0.1   | Linux            |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
+| Name     | Function    | IP Address  | Operating System        |
+|----------|:------------|------------:|------------------------:|
+| Jump Box | Provisioner | 10.0.0.4    | Linux Ubuntu 20.04.3 LTS|
+| Web-1    | Web Server  | 10.0.0.7    | Linux Ubuntu 20.04.3 LTS|
+| Web-2    | Web Server  | 10.0.0.6    | Linux Ubuntu 20.04.3 LTS|
+| ELK VM   | ELK Server  | 10.1.0.5    | Linux Ubuntu 20.04.3 LTS|
 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _TODO: Add whitelisted IP addresses_
+Only the Jump Box machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
+- 98.36.200.158
 
-Machines within the network can only be accessed by _____.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+Machines within the network can only be accessed by the Jump Box with source IP 10.0.0.4.
+
 
 A summary of the access policies in place can be found in the table below.
 
-| Name     | Publicly Accessible | Allowed IP Addresses |
-|----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Name     | Publicly Accessible | Allowed IP Addresses   |
+|----------|---------------------|------------------------|
+| Jump Box | Yes                 | 98.36.200.158          |
+| Web-1    | No                  | 10.0.0.4               |
+| Web-2    | No                  | 10.0.0.4               |
+| ELK VM   | Yes                 | 98.36.200.158 10.0.0.4 |
 
 ### Elk Configuration
 
-Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because reduces the risk of human error, standardizes the configuration making it easy to replicate and fast to re-deploy. 
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+- Increase virtual memory: Configures the target VM (the machine being configured) to use more memory
+- Install docker.io: The Docker engine, used for running containers
+- Install python3-pip:  Package used to install Python software
+- Install Docker module: Python client for Docker. Required by Ansbile to control the state of Docker containers
+- Download and launch a docker elk container
+- Enable service docker on boot
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
