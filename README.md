@@ -4,9 +4,12 @@ The files in this repository were used to configure the network depicted below.
 
 ![Diagram](https://github.com/gabg1/cyberstudies/blob/1b954f0d346a2220ff6da098eeeadb92bff322b4/Diagrams/Diagramend.png?raw=true)
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the playbook files may be used to install only certain pieces of it, such as Filebeat.
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. 
+Alternatively, select portions of the deployment file may be used to install only certain pieces of it, such as Filebeat.
 
-  - _TODO: Enter the playbook file._
+Deployment file: 
+
+  - install-elk.yml (https://github.com/gabg1/cyberstudies/blob/43d3b2c0d88cf29713b89d2e328ddd7452f79337/Ansible/install-elk.yml)
 
 This document contains the following details:
 - Description of the Topology
@@ -21,22 +24,20 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly available, in addition to restricting downtime to the network.
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+Load balancing ensures that the application will be highly available, in addition to restricting inbound access to the network. 
 
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the file system and system logs.
-- _TODO: What does Filebeat watch for?_
-- _TODO: What does Metricbeat record?_
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the file system and system metrics.
+Filebeat watches for log information about the file system, including which files have changed and when.
+Metricbeat collect metrics from the operating system and from services running on the server.
 
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
 | Name     | Function    | IP Address  | Operating System        |
 |----------|:------------|------------:|------------------------:|
-| Jump Box | Provisioner | 10.0.0.4    | Linux Ubuntu 20.04.3 LTS|
+| Jump Box | Gateway     | 10.0.0.4    | Linux Ubuntu 20.04.3 LTS|
 | Web-1    | Web Server  | 10.0.0.7    | Linux Ubuntu 20.04.3 LTS|
 | Web-2    | Web Server  | 10.0.0.6    | Linux Ubuntu 20.04.3 LTS|
-| ELK VM   | ELK Server  | 10.1.0.5    | Linux Ubuntu 20.04.3 LTS|
+| ELK VM   | Monitoring  | 10.1.0.5    | Linux Ubuntu 20.04.3 LTS|
 
 ### Access Policies
 
@@ -45,7 +46,7 @@ The machines on the internal network are not exposed to the public Internet.
 Only the Jump Box machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 - 98.36.200.158
 
-Machines within the network can only be accessed by the Jump Box with source IP 10.0.0.4.
+Machines within the network can only be accessed by the Jump Box with IP 10.0.0.4.
 
 
 A summary of the access policies in place can be found in the table below.
@@ -55,7 +56,7 @@ A summary of the access policies in place can be found in the table below.
 | Jump Box | Yes                 | 98.36.200.158          |
 | Web-1    | No                  | 10.0.0.4               |
 | Web-2    | No                  | 10.0.0.4               |
-| ELK VM   | Yes                 | 98.36.200.158 10.0.0.4 |
+| ELK VM   | No                  | 10.0.0.4               |
 
 ### Elk Configuration
 
@@ -71,25 +72,37 @@ The playbook implements the following tasks:
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
+![docker ps](https://github.com/gabg1/cyberstudies/blob/43d3b2c0d88cf29713b89d2e328ddd7452f79337/Diagrams/Day%201%20Screenshot/docker_ps.png?raw=true)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
+10.0.0.7 (Web-1) 10.0.0.6(Web-2)
 
 We have installed the following Beats on these machines:
-- _TODO: Specify which Beats you successfully installed_
+Filebeat, Metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+- Filebeat: Monitor the Apache server and MySQL database logs generated by DVWA
+- Metricbeat: Monitor metrics from the DVWA machines.  
+
+
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the _____ file to _____.
-- Update the _____ file to include...
-- Run the playbook, and navigate to ____ to check that the installation worked as expected.
+- Copy the [install-elk.yml]((https://github.com/gabg1/cyberstudies/blob/43d3b2c0d88cf29713b89d2e328ddd7452f79337/Ansible/install-elk.yml) file to your machine on "/etc/ansible" location.
+ - Edit your "hosts" file to include the Web Servers VMs (webservers) and the VM where you ELK stack will run(elk).
+>Example:
+># /etc/ansible/hosts
+> [webservers]
+>10.0.0.7 ansible_python_interpreter=/usr/bin/python3
+>10.0.0.6 ansible_python_interpreter=/usr/bin/python3
+>
+>[elk]
+>10.1.0.5 ansible_python_interpreter=/usr/bin/python3
+ 
+- Run the playbook, and navigate to " http://[your.ELK-VM.External.IP]:5601/app/kibana" to check that the installation worked as expected.
 
 _TODO: Answer the following questions to fill in the blanks:_
 - _Which file is the playbook? Where do you copy it?_
