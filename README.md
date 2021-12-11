@@ -117,7 +117,7 @@ $ nano /etc/ansible/hosts
 $ ansible-playbook install-elk.yml 
 ```
 - After running the playbook, navigate to " http://[your.ELK-VM.External.IP]:5601/app/kibana" to check that the installation worked as expected. If successful, you should see a page similiar to the one shown below: 
-[Kibana](https://github.com/gabg1/cyberstudies/blob/e29f13df5a00ead1f4cbe55d6289f2084d5dac1e/Diagrams/Day%201%20Screenshot/kibana_dash.png)
+[Kibana](https://github.com/gabg1/cyberstudies/blob/e29f13df5a00ead1f4cbe55d6289f2084d5dac1e/Diagrams/Day%201%20Screenshot/kibana_dash.png?raw=true)
 
 - Playbook to install Filebeat, download: [Filebeat](https://github.com/gabg1/cyberstudies/blob/e29f13df5a00ead1f4cbe55d6289f2084d5dac1e/Ansible/filebeat-playbook.yml)
 
