@@ -9,7 +9,7 @@ Alternatively, select portions of the deployment file may be used to install onl
 
 Deployment file: 
 
-  - install-elk.yml (https://github.com/gabg1/cyberstudies/blob/43d3b2c0d88cf29713b89d2e328ddd7452f79337/Ansible/install-elk.yml)
+  - [install-elk.yml](https://github.com/gabg1/cyberstudies/blob/43d3b2c0d88cf29713b89d2e328ddd7452f79337/Ansible/install-elk.yml)
 
 This document contains the following details:
 - Description of the Topology
@@ -76,7 +76,7 @@ The following screenshot displays the result of running `docker ps` after succes
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-10.0.0.7 (Web-1) 10.0.0.6(Web-2)
+10.0.0.7(Web-1) 10.0.0.6(Web-2)
 
 We have installed the following Beats on these machines:
 Filebeat, Metricbeat
@@ -92,21 +92,32 @@ In order to use the playbook, you will need to have an Ansible control node alre
 
 SSH into the control node and follow the steps below:
 - Copy the [install-elk.yml]((https://github.com/gabg1/cyberstudies/blob/43d3b2c0d88cf29713b89d2e328ddd7452f79337/Ansible/install-elk.yml) file to your machine on "/etc/ansible" location.
- - Edit your "hosts" file to include the Web Servers VMs (webservers) and the VM where you ELK stack will run(elk).
->Example:
-># /etc/ansible/hosts
-> [webservers]
->10.0.0.7 ansible_python_interpreter=/usr/bin/python3
->10.0.0.6 ansible_python_interpreter=/usr/bin/python3
->
->[elk]
->10.1.0.5 ansible_python_interpreter=/usr/bin/python3
+
+$ cd /etc/ansible/
+$ curl https://github.com/gabg1/cyberstudies/blob/e29f13df5a00ead1f4cbe55d6289f2084d5dac1e/Ansible/install-elk.yml > /etc/ansible/install-elk.yml
+
+- On "/etc/ansible/" edit your "hosts" file to include the Web Servers VMs (webservers) and the VM where you ELK stack will run(elk). 
+- 
+Example:
+
+$ nano /etc/ansible/hosts
+
+####
+[webservers]
+10.0.0.7 ansible_python_interpreter=/usr/bin/python3
+10.0.0.6 ansible_python_interpreter=/usr/bin/python3
+
+[elk]
+10.1.0.5 ansible_python_interpreter=/usr/bin/python3
+####
  
-- Run the playbook, and navigate to " http://[your.ELK-VM.External.IP]:5601/app/kibana" to check that the installation worked as expected.
+- Run the playbook:
+ansible-playbook install-elk.yml 
 
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-- _Which URL do you navigate to in order to check that the ELK server is running?
+- After running the playbook, navigate to " http://[your.ELK-VM.External.IP]:5601/app/kibana" to check that the installation worked as expected. If successful, you should see a page similiar to the one shown below: 
+- [Kibana](https://github.com/gabg1/cyberstudies/blob/e29f13df5a00ead1f4cbe55d6289f2084d5dac1e/Diagrams/Day%201%20Screenshot/kibana_dash.png)
 
-_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+- Playbook to install Filebeat, download: [Filebeat](https://github.com/gabg1/cyberstudies/blob/e29f13df5a00ead1f4cbe55d6289f2084d5dac1e/Ansible/filebeat-playbook.yml)
+
+- Playbook to install Metricbeat, download: [Metricbeat](https://github.com/gabg1/cyberstudies/blob/e29f13df5a00ead1f4cbe55d6289f2084d5dac1e/Ansible/metricbeat-playbook.yml)
+
