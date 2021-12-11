@@ -91,13 +91,13 @@ These Beats allow us to collect the following information from each machine:
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the [install-elk.yml](https://github.com/gabg1/cyberstudies/blob/43d3b2c0d88cf29713b89d2e328ddd7452f79337/Ansible/install-elk.yml) file to your machine on "/etc/ansible" location.
+- Copy the [install-elk.yml](https://github.com/gabg1/cyberstudies/blob/43d3b2c0d88cf29713b89d2e328ddd7452f79337/Ansible/install-elk.yml) file to your machine and move it to `/etc/ansible` location.
 ```
 $ cd /etc/ansible/ 
 $ curl https://github.com/gabg1/cyberstudies/blob/e29f13df5a00ead1f4cbe55d6289f2084d5dac1e/Ansible/install-elk.yml > /etc/ansible/install-elk.yml
 ```
 
-- On "/etc/ansible/" edit your "hosts" file to include the Web Servers VMs[webservers] and the VM where you ELK stack will run[elk]. 
+- On `/etc/ansible/` edit your `hosts` file to include the Web Servers VMs[webservers] and the VM where you ELK stack will run[elk]. 
 
 Example:
 
@@ -116,7 +116,7 @@ $ nano /etc/ansible/hosts
 ```
 $ ansible-playbook install-elk.yml 
 ```
-- After running the playbook, navigate to " http://[your.ELK-VM.External.IP]:5601/app/kibana" to check that the installation worked as expected. If successful, you should see a page similiar to the one shown below: 
+- After running the playbook, navigate to  `http://[your.ELK-VM.External.IP]:5601/app/kibana` to confirm that installation worked as expected. If successful, you should see a page similiar to the one shown below: 
 ![Kibana](https://github.com/gabg1/cyberstudies/blob/e29f13df5a00ead1f4cbe55d6289f2084d5dac1e/Diagrams/Day%201%20Screenshot/kibana_dash.png?raw=true)
 
 Additional playbooks can be found here:
