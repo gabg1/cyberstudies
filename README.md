@@ -119,6 +119,7 @@ $ ansible-playbook install-elk.yml
 - After running the playbook, navigate to " http://[your.ELK-VM.External.IP]:5601/app/kibana" to check that the installation worked as expected. If successful, you should see a page similiar to the one shown below: 
 ![Kibana](https://github.com/gabg1/cyberstudies/blob/e29f13df5a00ead1f4cbe55d6289f2084d5dac1e/Diagrams/Day%201%20Screenshot/kibana_dash.png?raw=true)
 
+Additional playbooks can be found here:
 - Playbook to install Filebeat, download: [Filebeat](https://github.com/gabg1/cyberstudies/blob/e29f13df5a00ead1f4cbe55d6289f2084d5dac1e/Ansible/filebeat-playbook.yml)
 
 - Playbook to install Metricbeat, download: [Metricbeat](https://github.com/gabg1/cyberstudies/blob/e29f13df5a00ead1f4cbe55d6289f2084d5dac1e/Ansible/metricbeat-playbook.yml)
